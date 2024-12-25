@@ -1,53 +1,91 @@
 <script setup>
-import NavLink from "../Components/NavLink.vue";
-
-
+import {
+    HomeIcon,
+    UsersIcon,
+    InboxIcon,
+    BuildingOfficeIcon,
+} from "@heroicons/vue/24/solid";
 </script>
 
 <template>
-    <header class="bg-slate-800 text-white">
-        <nav
-            class="py-4 px-2 mx-auto max-w-screen-lg flex items-center justify-between"
-        >
-            <div class="flex w-full justify-between items-center">
-                <NavLink routeName="home" componentName="Home"> Home</NavLink>
+    <div class="h-screen overflow-hidden">
+        <div class="header">
+            <div class="logo">Your logo</div>
+            <div class="title">name or tittle of your app</div>
+        </div>
+
+        <div class="bg-gray-600 flex h-full">
+            <div class="flex flex-col w-60 bg-[#2f365f]">
+                <div
+                    class="nav-item"
+                    :class="{
+                        'text-white': $page.component === 'Dashboard',
+                    }"
+                >
+                    <HomeIcon class="h-5 w-5" />
+
+                    <Link
+                        :href="route('dashboard')"
+                        class="nav-link"
+                        preserve-scroll
+                    >
+                        Dashboard
+                    </Link>
+                </div>
 
                 <div
-                    v-if="$page.props.auth.user"
-                    class="flex items-center gap-2"
+                    class="nav-item"
+                    :class="{
+                        'text-white': $page.component === 'Organization',
+                    }"
                 >
-                    <img
-                        class="avatar"
-                        :src="
-                            $page.props.auth.user.avatar
-                                ? 'storage/' + $page.props.auth.user.avatar
-                                : 'storage/avatar/default_profile.jpg'
-                        "
-                        alt=""
-                    />
-                    <Link
-                        
-                        :href="route('logout')"
-                        method="post"
-                        as="button"
-                        class="nav-link"
-                        >Logout</Link
-                    >
-                </div>
+                    <BuildingOfficeIcon class="h-5 w-5" />
 
-                <div v-else class="flex gap-3">
-                    <NavLink routeName="register" componentName="Auth/Register">
-                        Register</NavLink
+                    <Link
+                        :href="route('organization')"
+                        class="nav-link"
+                        preserve-scroll
                     >
-                    <NavLink routeName="login" componentName="Auth/Login">
-                        Login</NavLink
+                        Organizations
+                    </Link>
+                </div>
+                <div
+                    class="nav-item"
+                    :class="{
+                        'text-white': $page.component === 'Contracts',
+                    }"
+                >
+                    <UsersIcon class="h-5 w-5" />
+
+                    <Link
+                        :href="route('contracts')"
+                        class="nav-link"
+                        preserve-scroll
                     >
+                        Contracts
+                    </Link>
+                </div>
+                <div
+                    class="nav-item"
+                    :class="{
+                        'text-white': $page.component === 'Reports',
+                    }"
+                >
+                    <InboxIcon class="h-5 w-5" />
+
+                    <Link
+                        :href="route('reports')"
+                        class="nav-link"
+                        preserve-scroll
+                    >
+                        Reposts
+                    </Link>
                 </div>
             </div>
-        </nav>
-    </header>
 
-    <main class="p-6 mx-auto max-w-screen-lg">
-        <slot />
-    </main>
+            <main class="w-full h-full bg-[#f3f4f6] p-6">
+                <slot />
+            </main>
+        </div>
+    </div>
 </template>
