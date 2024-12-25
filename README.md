@@ -1,4 +1,4 @@
- ## After cloning this repo, do the following steps:
+ ## After cloning this starter kit, do the following steps:
 1. `composer install`
 2. `npm install`
 3. Duplicate the `.env.example` file and rename it to `.env`
